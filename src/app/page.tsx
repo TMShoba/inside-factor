@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BreakingTicker from "@/components/BreakingTicker";
 import ArticleCard from "@/components/ArticleCard";
+import NewsletterForm from "@/components/NewsletterForm";
 import {
   articles,
   categories,
@@ -97,7 +98,7 @@ export default function Home() {
                   {cat}
                 </h2>
                 <Link
-                  href={`/#${cat.toLowerCase()}`}
+                  href={`/category/${cat.toLowerCase()}`}
                   className="text-sm font-medium text-[var(--primary)] hover:underline"
                 >
                   View all →
@@ -112,6 +113,12 @@ export default function Home() {
           );
         })}
 
+        <section className="bg-white border-y border-[var(--border)]">
+          <div className="max-w-xl mx-auto px-4 py-12">
+            <NewsletterForm />
+          </div>
+        </section>
+
         <section className="bg-[var(--accent)] text-white">
           <div className="max-w-7xl mx-auto px-4 py-12 text-center">
             <h2 className="text-2xl font-bold mb-3">Inside Factor</h2>
@@ -121,6 +128,12 @@ export default function Home() {
               — corruption, power, and the stories that matter to South Africa
               and the continent.
             </p>
+            <Link
+              href="/about"
+              className="inline-block mt-4 text-sm font-medium text-white/90 underline hover:text-white"
+            >
+              Learn more about us →
+            </Link>
           </div>
         </section>
       </main>
