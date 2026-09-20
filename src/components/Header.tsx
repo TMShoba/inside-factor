@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { categories } from "@/data/articles";
+import SearchBox from "@/components/SearchBox";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -19,8 +20,8 @@ export default function Header() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-2 group">
+        <div className="flex items-center justify-between h-16 gap-4">
+          <Link href="/" className="flex items-center gap-2 group shrink-0">
             <div className="w-9 h-9 bg-[var(--primary)] rounded flex items-center justify-center text-white font-bold text-lg">
               IF
             </div>
@@ -34,21 +35,31 @@ export default function Header() {
             </div>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1">
             {categories.map((cat) => (
               <Link
                 key={cat}
-                href={`/#${cat.toLowerCase()}`}
+                href={`/category/${cat.toLowerCase()}`}
                 className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-[var(--primary)] hover:bg-red-50 rounded-md transition-colors"
               >
                 {cat}
               </Link>
             ))}
+            <Link
+              href="/about"
+              className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-[var(--primary)] hover:bg-red-50 rounded-md transition-colors"
+            >
+              About
+            </Link>
           </nav>
+
+          <div className="hidden md:block w-48 lg:w-56">
+            <SearchBox />
+          </div>
 
           <button
             type="button"
-            className="md:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100"
+            className="lg:hidden p-2 rounded-md text-gray-600 hover:bg-gray-100"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -65,18 +76,28 @@ export default function Header() {
         </div>
 
         {open && (
-          <nav className="md:hidden pb-4 border-t border-[var(--border)] pt-2">
-            {categories.map((cat) => (
+          <div className="lg:hidden pb-4 border-t border-[var(--border)] pt-3 space-y-3">
+            <SearchBox compact />
+            <nav>
+              {categories.map((cat) => (
+                <Link
+                  key={cat}
+                  href={`/category/${cat.toLowerCase()}`}
+                  className="block px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-[var(--primary)] rounded"
+                  onClick={() => setOpen(false)}
+                >
+                  {cat}
+                </Link>
+              ))}
               <Link
-                key={cat}
-                href={`/#${cat.toLowerCase()}`}
+                href="/about"
                 className="block px-3 py-2.5 text-sm font-medium text-gray-700 hover:bg-red-50 hover:text-[var(--primary)] rounded"
                 onClick={() => setOpen(false)}
               >
-                {cat}
+                About
               </Link>
-            ))}
-          </nav>
+            </nav>
+          </div>
         )}
       </div>
     </header>
