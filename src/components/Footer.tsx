@@ -1,12 +1,13 @@
 import Link from "next/link";
 import { categories } from "@/data/articles";
+import NewsletterForm from "@/components/NewsletterForm";
 
 export default function Footer() {
   return (
     <footer className="bg-[var(--accent)] text-white mt-auto">
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-10 h-10 bg-[var(--primary)] rounded flex items-center justify-center text-white font-bold text-lg">
                 IF
@@ -18,10 +19,9 @@ export default function Footer() {
                 </p>
               </div>
             </div>
-            <p className="text-sm text-white/80 max-w-md leading-relaxed">
+            <p className="text-sm text-white/80 leading-relaxed">
               Unfiltered and uncensored news. Probing the deepest layers of
-              reality. Founded in the tradition of hard-hitting South African
-              investigative journalism by Thabo Makwakwa.
+              reality. By Thabo Makwakwa.
             </p>
           </div>
 
@@ -33,7 +33,7 @@ export default function Footer() {
               {categories.map((cat) => (
                 <li key={cat}>
                   <Link
-                    href={`/#${cat.toLowerCase()}`}
+                    href={`/category/${cat.toLowerCase()}`}
                     className="text-sm text-white/70 hover:text-white transition-colors"
                   >
                     {cat}
@@ -45,23 +45,34 @@ export default function Footer() {
 
           <div>
             <h4 className="font-semibold mb-3 text-sm uppercase tracking-wider text-white/90">
-              About
+              Site
             </h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>By Thabo Makwakwa</li>
-              <li>Independent Media</li>
-              <li>South Africa</li>
-              <li className="pt-2">
+              <li>
+                <Link href="/about" className="hover:text-white transition-colors">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link href="/search" className="hover:text-white transition-colors">
+                  Search
+                </Link>
+              </li>
+              <li>
                 <a
                   href="https://x.com/insightfactor"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  Follow on X →
+                  Follow on X
                 </a>
               </li>
             </ul>
+          </div>
+
+          <div>
+            <NewsletterForm variant="footer" />
           </div>
         </div>
 
